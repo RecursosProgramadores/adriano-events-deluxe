@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Send, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,6 +30,14 @@ export default function ContactSection() {
     fecha: "",
     mensaje: "",
   });
+  
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const decorY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,25 +63,56 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="section-padding bg-background">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} id="contacto" className="section-padding bg-background relative overflow-hidden">
+      {/* Parallax decorative elements */}
+      <motion.div 
+        className="absolute top-0 right-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl"
+        style={{ y: decorY }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm tracking-[0.3em] uppercase font-medium">
+          <motion.span 
+            className="text-primary text-sm tracking-[0.3em] uppercase font-medium inline-block"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             Contáctanos
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
             Solicita tu Cotización
-          </h2>
-          <div className="decorative-line" />
-          <p className="text-muted-foreground max-w-2xl mx-auto mt-6">
+          </motion.h2>
+          <motion.div 
+            className="decorative-line"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+          <motion.p 
+            className="text-muted-foreground max-w-2xl mx-auto mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             Cuéntanos sobre tu evento y te enviaremos una propuesta personalizada sin compromiso
-          </p>
+          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">

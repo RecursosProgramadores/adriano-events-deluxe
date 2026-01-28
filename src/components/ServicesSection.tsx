@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Heart, Crown, GraduationCap, Building2, PartyPopper, Tent, Armchair, UtensilsCrossed } from "lucide-react";
 
 import weddingImg from "@/assets/hero-wedding.jpg";
@@ -73,37 +74,87 @@ const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.1 },
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
   },
 };
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  hidden: { opacity: 0, y: 60, scale: 0.9 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    scale: 1,
+    transition: { 
+      duration: 0.8, 
+      ease: "easeOut" as const
+    } 
+  },
 };
 
 export default function ServicesSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+
   return (
-    <section id="servicios" className="section-padding bg-background">
-      <div className="container mx-auto px-4">
+    <section ref={sectionRef} id="servicios" className="section-padding bg-background relative overflow-hidden">
+      {/* Parallax decorative elements */}
+      <motion.div 
+        className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
+        style={{ y: backgroundY }}
+      />
+      <motion.div 
+        className="absolute bottom-0 right-0 w-96 h-96 bg-accent/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
+        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]) }}
+      />
+
+      <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="text-center mb-16"
         >
-          <span className="text-primary text-sm tracking-[0.3em] uppercase font-medium">
+          <motion.span 
+            className="text-primary text-sm tracking-[0.3em] uppercase font-medium inline-block"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             Lo que hacemos
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6">
+          </motion.span>
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+          >
             Nuestros Servicios
-          </h2>
-          <div className="decorative-line" />
-          <p className="text-muted-foreground max-w-2xl mx-auto mt-6">
+          </motion.h2>
+          <motion.div 
+            className="decorative-line"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
+          <motion.p 
+            className="text-muted-foreground max-w-2xl mx-auto mt-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             Ofrecemos una gama completa de servicios para hacer de tu evento una experiencia única e inolvidable
-          </p>
+          </motion.p>
         </motion.div>
 
         {/* Services Grid */}
@@ -111,23 +162,32 @@ export default function ServicesSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
-          {services.map((service) => {
+          {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <motion.a
                 key={service.id}
                 href={`#${service.id}`}
                 variants={itemVariants}
+                whileHover={{ 
+                  y: -10, 
+                  transition: { duration: 0.3 } 
+                }}
                 className="group relative overflow-hidden rounded-lg aspect-[4/5] card-hover"
+                style={{
+                  transformOrigin: index % 2 === 0 ? "bottom left" : "bottom right"
+                }}
               >
                 {/* Background Image */}
-                <img
+                <motion.img
                   src={service.image}
                   alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.7 }}
                 />
                 
                 {/* Overlay */}
@@ -135,15 +195,25 @@ export default function ServicesSection() {
                 
                 {/* Content */}
                 <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                  <div className="transform transition-transform duration-300 group-hover:-translate-y-2">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center mb-4 border border-white/20">
+                  <motion.div 
+                    className="transform transition-transform duration-300 group-hover:-translate-y-2"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 + index * 0.05 }}
+                  >
+                    <motion.div 
+                      className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center mb-4 border border-white/20"
+                      whileHover={{ rotate: 360, scale: 1.1 }}
+                      transition={{ duration: 0.6 }}
+                    >
                       <Icon className="w-6 h-6" />
-                    </div>
+                    </motion.div>
                     <h3 className="text-xl font-heading font-semibold mb-2">{service.title}</h3>
                     <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {service.description}
                     </p>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.a>
             );
