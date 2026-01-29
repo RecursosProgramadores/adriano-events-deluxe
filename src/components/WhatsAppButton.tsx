@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MessageCircle } from "lucide-react";
+import wstpLogo from "@/assets/logos/wstp.svg";
 
 const WHATSAPP_NUMBER = "51912560874";
 const DEFAULT_MESSAGE = "¡Hola! Me interesa obtener información sobre sus servicios de eventos. ¿Podrían ayudarme?";
@@ -44,7 +45,7 @@ export default function WhatsAppButton() {
       {/* Main button */}
       <div className="relative w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#25D366] shadow-[0_10px_30px_rgba(37,211,102,0.4)] flex items-center justify-center transition-all duration-500 group-hover:shadow-[0_15px_40px_rgba(37,211,102,0.6)] group-hover:scale-110">
         <img
-          src="/src/assets/logos/wstp.svg"
+          src={wstpLogo}
           alt="WhatsApp"
           className="w-8 h-8 md:w-10 md:h-10 brightness-0 invert"
         />
