@@ -109,53 +109,61 @@
 }
 
 @layer components {
-  /* Hero section styles */
+  /* Hero section styles with better contrast */
   .hero-gradient {
     background: linear-gradient(
       to bottom,
       hsla(0, 0%, 0%, 0.4) 0%,
-      hsla(0, 0%, 0%, 0.6) 50%,
-      hsla(0, 0%, 0%, 0.7) 100%
+      hsla(0, 0%, 0%, 0.5) 40%,
+      hsla(0, 0%, 0%, 0.8) 100%
     );
+  }
+
+  /* Glassmorphism effects */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-lg border border-white/10;
   }
 
   /* Elegant card hover effect */
   .card-hover {
-    @apply transition-all duration-500 ease-out;
+    @apply transition-all duration-500 ease-out border border-transparent;
   }
 
   .card-hover:hover {
-    @apply shadow-2xl -translate-y-2;
+    @apply shadow-2xl -translate-y-2 border-primary/20 bg-accent/50;
   }
 
-  /* Gold gradient accent */
+  /* Gold gradient accent - More vibrant */
   .gold-gradient {
     background: linear-gradient(
       135deg,
-      hsl(40, 50%, 45%) 0%,
-      hsl(45, 60%, 55%) 50%,
-      hsl(40, 50%, 45%) 100%
+      hsl(40, 65%, 48%) 0%,
+      hsl(45, 75%, 60%) 50%,
+      hsl(35, 60%, 42%) 100%
     );
   }
 
   /* Subtle glow effect */
   .glow-gold {
-    box-shadow: 0 0 40px hsla(40, 50%, 45%, 0.15);
+    box-shadow: 0 0 30px hsla(40, 60%, 50%, 0.2);
+  }
+  
+  .glow-gold-strong {
+    box-shadow: 0 0 50px hsla(40, 65%, 50%, 0.4);
   }
 
   /* Premium button styles */
   .btn-premium {
-    @apply relative overflow-hidden transition-all duration-300;
+    @apply relative overflow-hidden transition-all duration-500;
   }
 
   .btn-premium::before {
     content: '';
-    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-    background: linear-gradient(
-      135deg,
-      hsla(40, 60%, 55%, 0.2) 0%,
-      transparent 100%
-    );
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500 bg-white/20;
   }
 
   .btn-premium:hover::before {
@@ -164,21 +172,38 @@
 
   /* Section spacing */
   .section-padding {
-    @apply py-20 md:py-28 lg:py-32;
+    @apply py-24 md:py-32 lg:py-40;
   }
 
-  /* Decorative line */
+  /* Decorative line - Animated */
   .decorative-line {
-    @apply w-16 h-0.5 bg-primary mx-auto;
+    @apply w-16 h-1 bg-primary mx-auto rounded-full;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .decorative-line::after {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+    animation: shine 3s infinite;
+  }
+  
+  @keyframes shine {
+    to { left: 200%; }
   }
 
   /* Image hover zoom */
   .img-zoom {
-    @apply overflow-hidden;
+    @apply overflow-hidden rounded-2xl;
   }
 
   .img-zoom img {
-    @apply transition-transform duration-700 ease-out;
+    @apply transition-transform duration-1000 ease-out;
   }
 
   .img-zoom:hover img {
@@ -188,14 +213,19 @@
 
 @layer utilities {
   /* Text shadow for hero */
-  .text-shadow {
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  .text-shadow-premium {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #d4af37 0%, #f9d976 50%, #b8860b 100%);
   }
 
   /* Smooth reveal animation */
   .reveal {
     @apply opacity-0 translate-y-8;
-    animation: reveal 0.8s ease-out forwards;
+    animation: reveal 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   @keyframes reveal {
@@ -207,23 +237,24 @@
 
   /* Elegant underline animation */
   .link-underline {
-    @apply relative;
+    @apply relative py-1;
   }
 
   .link-underline::after {
     content: '';
-    @apply absolute bottom-0 left-0 w-0 h-px bg-primary transition-all duration-300;
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-500 ease-in-out;
   }
 
   .link-underline:hover::after {
     @apply w-full;
   }
+  
+  .mask-radial {
+    mask-image: radial-gradient(circle, black 0%, transparent 80%);
+  }
 
-  /* Parallax helper */
-  .parallax-bg {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  .mask-linear-gallery {
+    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
   }
 }
+

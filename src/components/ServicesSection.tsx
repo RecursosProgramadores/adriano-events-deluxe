@@ -1,5 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { Heart, Crown, GraduationCap, Building2, PartyPopper, Tent, Armchair, UtensilsCrossed } from "lucide-react";
 
 import weddingImg from "@/assets/hero-wedding.jpg";
@@ -13,7 +14,7 @@ import tablewareImg from "@/assets/tableware.jpg";
 
 const services = [
   {
-    id: "bodas",
+    id: "boda",
     icon: Heart,
     title: "Bodas",
     description: "Celebramos el amor con elegancia y atención a cada detalle",
@@ -41,7 +42,7 @@ const services = [
     image: corpImg,
   },
   {
-    id: "sociales",
+    id: "cumple",
     icon: PartyPopper,
     title: "Shows Sociales",
     description: "Cumpleaños, activaciones y showrooms memorables",
@@ -80,14 +81,14 @@ const containerVariants = {
 
 const itemVariants = {
   hidden: { opacity: 0, y: 60, scale: 0.9 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
+  visible: {
+    opacity: 1,
+    y: 0,
     scale: 1,
-    transition: { 
-      duration: 0.8, 
+    transition: {
+      duration: 0.8,
       ease: "easeOut" as const
-    } 
+    }
   },
 };
 
@@ -97,65 +98,62 @@ export default function ServicesSection() {
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   return (
     <section ref={sectionRef} id="servicios" className="section-padding bg-background relative overflow-hidden">
-      {/* Parallax decorative elements */}
-      <motion.div 
-        className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"
-        style={{ y: backgroundY }}
-      />
-      <motion.div 
-        className="absolute bottom-0 right-0 w-96 h-96 bg-accent/30 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"
-        style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]) }}
-      />
+      {/* Background Shapes */}
+      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
+        <motion.div
+          className="absolute top-1/4 -left-20 w-80 h-80 bg-primary/5 rounded-full blur-[100px]"
+          style={{ y: backgroundY }}
+        />
+        <motion.div
+          className="absolute bottom-1/4 -right-20 w-[400px] h-[400px] bg-accent/20 rounded-full blur-[120px]"
+          style={{ y: useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]) }}
+        />
+      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center mb-16"
-        >
-          <motion.span 
-            className="text-primary text-sm tracking-[0.3em] uppercase font-medium inline-block"
+        <div className="text-center mb-20">
+          <motion.span
+            className="text-primary text-xs tracking-[0.4em] uppercase font-bold inline-block mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            Lo que hacemos
+            Servicios Exclusivos
           </motion.span>
-          <motion.h2 
-            className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6"
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-8"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Nuestros Servicios
+            Nuestras <span className="text-gradient-gold">Producciones</span>
           </motion.h2>
-          <motion.div 
-            className="decorative-line"
+          <motion.div
+            className="decorative-line h-1.5"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           />
-          <motion.p 
-            className="text-muted-foreground max-w-2xl mx-auto mt-6"
+          <motion.p
+            className="text-muted-foreground max-w-2xl mx-auto mt-8 text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Ofrecemos una gama completa de servicios para hacer de tu evento una experiencia única e inolvidable
+            Ofrecemos soluciones integrales y creativas para cada tipo de celebración,
+            garantizando excelencia y profesionalismo en cada detalle.
           </motion.p>
-        </motion.div>
+        </div>
 
         {/* Services Grid */}
         <motion.div
@@ -163,59 +161,58 @@ export default function ServicesSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
         >
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
-              <motion.a
+              <motion.div
                 key={service.id}
-                href={`#${service.id}`}
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -10, 
-                  transition: { duration: 0.3 } 
-                }}
-                className="group relative overflow-hidden rounded-lg aspect-[4/5] card-hover"
-                style={{
-                  transformOrigin: index % 2 === 0 ? "bottom left" : "bottom right"
-                }}
+                className="group relative overflow-hidden rounded-3xl aspect-[3/4] card-hover glass shadow-xl"
               >
-                {/* Background Image */}
-                <motion.img
-                  src={service.image}
-                  alt={service.title}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.7 }}
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent transition-opacity duration-300" />
-                
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
-                  <motion.div 
-                    className="transform transition-transform duration-300 group-hover:-translate-y-2"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + index * 0.05 }}
-                  >
-                    <motion.div 
-                      className="w-12 h-12 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center mb-4 border border-white/20"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.6 }}
-                    >
-                      <Icon className="w-6 h-6" />
-                    </motion.div>
-                    <h3 className="text-xl font-heading font-semibold mb-2">{service.title}</h3>
-                    <p className="text-white/80 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {service.description}
-                    </p>
-                  </motion.div>
+                <Link to={`/servicios/${service.id}`} className="absolute inset-0 z-20" />
+                {/* Background Image Container */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <motion.img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                    whileHover={{ scale: 1.15 }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 group-hover:via-black/20 transition-all duration-500" />
                 </div>
-              </motion.a>
+
+                {/* Content */}
+                <div className="absolute inset-0 z-10 p-8 flex flex-col">
+                  {/* Icon at Top-Left */}
+                  <motion.div
+                    className="w-12 h-12 rounded-2xl glass-dark flex items-center justify-center mb-auto self-start glow-gold group-hover:glow-gold-strong transition-all duration-500 shadow-2xl border border-white/10"
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                  >
+                    <Icon className="w-6 h-6 text-primary" />
+                  </motion.div>
+
+                  {/* Text at Bottom */}
+                  <div className="mt-auto">
+                    <h3 className="text-2xl font-heading font-bold text-white mb-3 transition-colors duration-300">
+                      {service.title}
+                    </h3>
+
+                    <div className="h-0 group-hover:h-auto overflow-hidden transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100">
+                      <p className="text-white text-sm leading-relaxed mb-4 font-medium drop-shadow-md">
+                        {service.description}
+                      </p>
+                      <div className="flex items-center gap-2 text-white font-bold text-xs uppercase tracking-[0.2em]">
+                        Ver detalles <span className="w-10 h-[2px] bg-white scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Corner Accent */}
+                <div className="absolute top-0 right-0 w-20 h-20 bg-primary/20 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
+              </motion.div>
             );
           })}
         </motion.div>

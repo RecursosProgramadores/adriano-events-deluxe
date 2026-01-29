@@ -9,130 +9,72 @@ export default function HeroSection() {
     target: sectionRef,
     offset: ["start start", "end start"]
   });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
-    <section ref={sectionRef} id="inicio" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Parallax */}
-      <motion.div 
+    <section ref={sectionRef} id="inicio" className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-charcoal">
+      {/* Background Image with Parallax and Zoom */}
+      <motion.div
         className="absolute inset-0"
         style={{ y: backgroundY }}
       >
-        <img
+        <motion.img
+          initial={{ scale: 1.2 }}
+          animate={{ scale: 1.1 }}
+          transition={{ duration: 10, ease: "easeOut" }}
           src={heroImage}
           alt="Evento de lujo - Producciones Eventos Adriano"
-          className="w-full h-full object-cover scale-110"
+          className="w-full h-full object-cover"
         />
-        <div className="hero-gradient absolute inset-0" />
+        {/* Subtle Bottom Gradient for text readability if needed, but keeping it minimal for "natural" look */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/40 to-transparent z-10" />
       </motion.div>
 
-      {/* Content with Parallax */}
-      <motion.div 
-        className="relative z-10 container mx-auto px-4 text-center"
-        style={{ y: textY, opacity }}
-      >
+      {/* Floating Decorative Elements */}
+      <div className="absolute inset-0 z-30 pointer-events-none">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-4xl mx-auto"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, 0]
+          }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/4 left-10 w-24 h-24 bg-primary/10 rounded-full blur-2xl md:block hidden"
+        />
+        <motion.div
+          animate={{
+            y: [0, 30, 0],
+            rotate: [0, -10, 0]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute bottom-1/4 right-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl md:block hidden"
+        />
+      </div>
+
+      {/* Refined Small Centered Button with Animation */}
+      <div className="absolute bottom-16 left-0 right-0 z-50 flex justify-center px-4">
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         >
-          {/* Decorative line */}
-          <motion.div 
-            className="flex items-center justify-center gap-4 mb-8"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
+          <Button
+            onClick={() => {
+              const nextSection = document.getElementById('servicios');
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            variant="outline"
+            className="group relative px-8 py-4 bg-black/30 backdrop-blur-lg border-white/20 text-white rounded-full hover:bg-white hover:text-charcoal transition-all duration-500 border shadow-lg active:scale-90"
           >
-            <motion.div 
-              className="w-16 h-px bg-white/40"
-              initial={{ width: 0 }}
-              animate={{ width: 64 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-            <span className="text-white/80 text-sm tracking-[0.3em] uppercase font-light">
-              Lima, Perú
+            <span className="text-xs font-heading font-medium uppercase tracking-[0.5em] mr-[-0.5em]">
+              Descubre más
             </span>
-            <motion.div 
-              className="w-16 h-px bg-white/40"
-              initial={{ width: 0 }}
-              animate={{ width: 64 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-            />
-          </motion.div>
-
-          {/* Main heading */}
-          <motion.h1 
-            className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 text-shadow"
-            initial={{ opacity: 0, y: 30, rotateX: 15 }}
-            animate={{ opacity: 1, y: 0, rotateX: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-          >
-            Producciones Eventos
-            <motion.span 
-              className="block mt-2 text-gold-light"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-            >
-              Adriano
-            </motion.span>
-          </motion.h1>
-
-          {/* Subheadline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="text-lg md:text-xl text-white/90 mb-10 max-w-2xl mx-auto font-light leading-relaxed"
-          >
-            Creando momentos inolvidables con profesionalismo y elegancia.
-            Especialistas en bodas, quinceañeros, graduaciones y eventos corporativos.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-              <Button variant="hero" size="xl" asChild>
-                <a href="#contacto">Solicita tu Cotización Ahora</a>
-              </Button>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-              <Button variant="heroOutline" size="xl" asChild>
-                <a href="#servicios">Ver Servicios</a>
-              </Button>
-            </motion.div>
-          </motion.div>
+          </Button>
         </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-2"
-          >
-            <motion.div 
-              className="w-1.5 h-3 bg-white/60 rounded-full"
-              animate={{ y: [0, 8, 0], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            />
-          </motion.div>
-        </motion.div>
-      </motion.div>
+      </div>
     </section>
   );
 }

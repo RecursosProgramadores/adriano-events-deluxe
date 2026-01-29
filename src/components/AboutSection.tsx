@@ -15,129 +15,143 @@ export default function AboutSection() {
     target: sectionRef,
     offset: ["start end", "end start"]
   });
-  
+
   const decorY1 = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
   const decorY2 = useTransform(scrollYProgress, [0, 1], ["20%", "-20%"]);
 
   return (
-    <section ref={sectionRef} className="section-padding bg-charcoal text-white relative overflow-hidden">
-      {/* Parallax decorative elements */}
-      <motion.div 
-        className="absolute top-0 left-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl"
+    <section ref={sectionRef} id="nosotros" className="section-padding bg-charcoal text-white relative overflow-hidden">
+      {/* Decorative Parallax Orbs */}
+      <motion.div
+        className="absolute top-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px]"
         style={{ y: decorY1 }}
       />
-      <motion.div 
-        className="absolute bottom-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl"
+      <motion.div
+        className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-accent/5 rounded-full blur-[100px]"
         style={{ y: decorY2 }}
       />
-      
+
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-          >
-            <motion.span 
-              className="text-primary text-sm tracking-[0.3em] uppercase font-medium inline-block"
+        <div className="max-w-6xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center mb-24">
+            <motion.span
+              className="text-primary text-xs tracking-[0.4em] uppercase font-bold inline-block mb-4"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              Sobre Nosotros
+              Legado & Excelencia
             </motion.span>
-            
-            <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-8"
+
+            <motion.h2
+              className="text-4xl md:text-6xl font-heading font-bold mt-4"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.8, delay: 0.1 }}
             >
-              Creando Experiencias
-              <motion.span 
-                className="text-primary inline-block ml-2"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
-                Inolvidables
-              </motion.span>
+              Sobre <span className="text-gradient-gold">Eventos Adriano</span>
             </motion.h2>
-            
-            <motion.p 
-              className="text-white/80 text-lg leading-relaxed mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              Somos especialistas en la producción de bodas, quinceañeros, graduaciones 
-              y eventos corporativos de alto nivel en Lima, Perú. Con años de experiencia, 
-              hemos transformado miles de celebraciones en momentos mágicos e inolvidables.
-            </motion.p>
-            
-            <motion.p 
-              className="text-white/80 text-lg leading-relaxed mb-10"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.3 }}
-            >
-              Valoramos la <span className="text-primary font-medium">excelencia</span>, 
-              la atención a los <span className="text-primary font-medium">detalles</span> y 
-              la <span className="text-primary font-medium">satisfacción total</span> de nuestros clientes. 
-              Cada evento es único y lo tratamos con la dedicación que merece.
-            </motion.p>
-
-            {/* Stats with staggered animation */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-              {stats.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 40, scale: 0.9 }}
-                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    delay: 0.4 + index * 0.1,
-                    duration: 0.6,
-                    ease: [0.22, 1, 0.36, 1]
-                  }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="text-center"
-                >
-                  <motion.div 
-                    className="text-3xl md:text-4xl font-heading font-bold text-primary mb-2"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.6 + index * 0.1 }}
-                  >
-                    {stat.number}
-                  </motion.div>
-                  <div className="text-sm text-white/60">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="decorative-line h-1.5 mx-auto mt-8"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.8 }}
+            />
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center mb-24">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <Button variant="hero" size="xl" asChild>
-                <a href="#contacto">Transforma tu idea en realidad</a>
-              </Button>
+              <h3 className="text-3xl font-heading font-bold mb-8 text-gradient-gold">Nuestra Historia</h3>
+              <p className="text-white/90 text-xl leading-relaxed mb-8 italic font-light pl-6 border-l-2 border-primary/30">
+                Un viaje desde la humildad hacia la cima de la organización de eventos.
+              </p>
+              <div className="space-y-6 text-white/70 text-lg leading-relaxed font-light">
+                <p>
+                  Lo que comenzó como un modesto emprendimiento familiar con una piñatería, se ha transformado en un referente de lujo y distinción en el Perú.
+                </p>
+                <p>
+                  A través de cada celebración, aprendimos que el secreto reside en los detalles que otros pasan por alto. Desde nuestros primeros toldos de madera hasta las majestuosas estructuras modernas, nuestra evolución ha sido impulsada por un compromiso inquebrantable con la perfección.
+                </p>
+              </div>
             </motion.div>
+
+            <div className="grid grid-cols-1 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="p-10 rounded-[2.5rem] glass-dark border border-white/10 relative group"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors" />
+                <h3 className="text-2xl font-heading font-bold mb-4 text-primary flex items-center gap-4">
+                  <span className="w-10 h-px bg-primary/50"></span> Nuestra Misión
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed font-light">
+                  Creamos momentos inolvidables mediante soluciones integrales y creativas de la más alta gama, garantizando experiencias memorables y exclusivas.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="p-10 rounded-[2.5rem] glass-dark border border-white/10 relative group"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-colors" />
+                <h3 className="text-2xl font-heading font-bold mb-4 text-primary flex items-center gap-4">
+                  <span className="w-10 h-px bg-primary/50"></span> Nuestra Visión
+                </h3>
+                <p className="text-white/70 text-lg leading-relaxed font-light">
+                  Consolidarnos como la productora líder en eventos sociales y corporativos a nivel nacional, siendo sinónimo de excelencia, prestigio y vanguardia.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Stats - Premium Presentation */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-10 mb-20 bg-white/5 backdrop-blur-sm rounded-[3rem] p-12 border border-white/5">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.6 }}
+                className="text-center group"
+              >
+                <div className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gradient-gold mb-3 transition-transform duration-500 group-hover:scale-110">
+                  {stat.number}
+                </div>
+                <div className="text-xs font-bold text-white/40 uppercase tracking-[0.3em] font-medium">{stat.label}</div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="text-center"
+          >
+            <Button variant="hero" size="xl" asChild className="btn-premium glow-gold px-12 py-8 text-xl">
+              <a href="#contacto">Inicia tu Proyecto</a>
+            </Button>
           </motion.div>
         </div>
       </div>
     </section>
   );
 }
+

@@ -17,18 +17,17 @@ function PricingCard({ title, subtitle, features, highlighted = false, eventType
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
-      className={`relative rounded-2xl p-8 transition-all duration-500 ${
-        highlighted
+      className={`relative rounded-2xl p-8 transition-all duration-500 ${highlighted
           ? "bg-charcoal text-white shadow-elegant-lg scale-105 z-10"
           : "bg-white border border-border shadow-elegant"
-      }`}
+        }`}
     >
       {highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-semibold tracking-wide uppercase">
           Más Popular
         </div>
       )}
-      
+
       <div className="text-center mb-8">
         <h3 className={`text-2xl font-heading font-bold mb-2 ${highlighted ? "text-white" : "text-foreground"}`}>
           {title}
@@ -41,9 +40,8 @@ function PricingCard({ title, subtitle, features, highlighted = false, eventType
       <ul className="space-y-4 mb-8">
         {features.map((feature, index) => (
           <li key={index} className="flex items-start gap-3">
-            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-              highlighted ? "bg-primary" : "bg-accent"
-            }`}>
+            <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${highlighted ? "bg-primary" : "bg-accent"
+              }`}>
               <Check className={`w-3 h-3 ${highlighted ? "text-primary-foreground" : "text-primary"}`} />
             </div>
             <span className={`text-sm ${highlighted ? "text-white/90" : "text-muted-foreground"}`}>
@@ -53,9 +51,9 @@ function PricingCard({ title, subtitle, features, highlighted = false, eventType
         ))}
       </ul>
 
-      <Button 
-        variant={highlighted ? "hero" : "outline"} 
-        className="w-full" 
+      <Button
+        variant={highlighted ? "hero" : "outline"}
+        className="w-full"
         asChild
       >
         <a href={`#contacto?evento=${eventType}&paquete=${title}`}>
@@ -152,27 +150,29 @@ export default function PricingSection() {
   return (
     <>
       {/* Bodas Section */}
-      <section id="bodas" className="section-padding bg-secondary/50">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm tracking-[0.3em] uppercase font-medium">
-              Servicios de Bodas
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6">
-              Paquetes de Bodas
+      <section id="bodas" className="section-padding bg-secondary/20 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20">
+            <motion.span
+              className="text-primary text-xs tracking-[0.4em] uppercase font-bold inline-block mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Organización de Elite
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8">
+              Paquetes de <span className="text-gradient-gold">Bodas</span>
             </h2>
-            <div className="decorative-line" />
-            <p className="text-muted-foreground max-w-2xl mx-auto mt-6">
-              Tu día especial merece lo mejor. Elige el paquete que mejor se adapte a tu visión.
+            <div className="decorative-line h-1.5" />
+            <p className="text-muted-foreground max-w-2xl mx-auto mt-8 text-lg">
+              Tu unión eterna merece una celebración majestuosa. Diseñamos experiencias
+              que trascienden el tiempo.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4 max-w-5xl mx-auto items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-8 max-w-7xl mx-auto items-stretch">
             {weddingPackages.map((pkg) => (
               <PricingCard
                 key={pkg.title}
@@ -185,27 +185,29 @@ export default function PricingSection() {
       </section>
 
       {/* 15 Años Section */}
-      <section id="quinceaneras" className="section-padding bg-background">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-primary text-sm tracking-[0.3em] uppercase font-medium">
-              Celebraciones de 15 Años
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-4 mb-6">
-              Paquetes de Quinceañeros
+      <section id="quinceaneras" className="section-padding bg-background relative overflow-hidden">
+        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-accent/10 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3" />
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="text-center mb-20">
+            <motion.span
+              className="text-primary text-xs tracking-[0.4em] uppercase font-bold inline-block mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Sueños Hechos Realidad
+            </motion.span>
+            <h2 className="text-4xl md:text-6xl font-heading font-bold mb-8">
+              Paquetes de <span className="text-gradient-gold">Quinceaños</span>
             </h2>
-            <div className="decorative-line" />
-            <p className="text-muted-foreground max-w-2xl mx-auto mt-6">
-              Hacemos realidad el sueño de cada quinceañera con eventos mágicos e inolvidables.
+            <div className="decorative-line h-1.5" />
+            <p className="text-muted-foreground max-w-2xl mx-auto mt-8 text-lg">
+              Creamos el escenario perfecto para que la princesa de la casa brille
+              en su noche más esperada.
             </p>
-          </motion.div>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-4 max-w-5xl mx-auto items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-8 max-w-7xl mx-auto items-stretch">
             {quincePackages.map((pkg) => (
               <PricingCard
                 key={pkg.title}
