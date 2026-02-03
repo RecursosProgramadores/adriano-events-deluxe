@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ScrollToHash from "./components/ScrollToHash";
 import Index from "./pages/Index";
 import Boda from "./pages/services/Boda";
 import Quinceaneras from "./pages/services/Quinceaneras";
@@ -10,8 +11,8 @@ import Graduaciones from "./pages/services/Graduaciones";
 import Corporativos from "./pages/services/Corporativos";
 import Cumple from "./pages/services/Cumple";
 import Toldos from "./pages/services/Toldos";
-import Mobiliario from "./pages/services/Mobiliario";
-import Menaje from "./pages/services/Menaje";
+import MobiliarioMenaje from "./pages/services/MobiliarioMenaje";
+import Sociales from "./pages/services/Sociales";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToHash />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/servicios/boda" element={<Boda />} />
@@ -30,8 +32,8 @@ const App = () => (
           <Route path="/servicios/corporativos" element={<Corporativos />} />
           <Route path="/servicios/cumple" element={<Cumple />} />
           <Route path="/servicios/toldos" element={<Toldos />} />
-          <Route path="/servicios/mobiliario" element={<Mobiliario />} />
-          <Route path="/servicios/menaje" element={<Menaje />} />
+          <Route path="/servicios/sociales" element={<Sociales />} />
+          <Route path="/servicios/mobiliario-y-menaje" element={<MobiliarioMenaje />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

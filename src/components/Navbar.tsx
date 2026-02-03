@@ -12,18 +12,13 @@ const navItems = [
     label: "Servicios",
     href: "/#servicios",
     children: [
-      { label: "Bodas", href: "/servicios/boda" },
-      { label: "15 Años", href: "/servicios/quinceaneras" },
-      { label: "Graduaciones", href: "/servicios/graduaciones" },
+      { label: "Eventos Sociales", href: "/servicios/sociales" },
       { label: "Eventos Corporativos", href: "/servicios/corporativos" },
-      { label: "Shows Sociales", href: "/servicios/cumple" },
       { label: "Alquiler de Toldos", href: "/servicios/toldos" },
-      { label: "Alquiler de Mobiliario", href: "/servicios/mobiliario" },
-      { label: "Alquiler de Menaje", href: "/servicios/menaje" },
+      { label: "Mobiliario y Menaje", href: "/servicios/mobiliario-y-menaje" },
     ],
   },
   { label: "Galería", href: "/#galeria" },
-  { label: "Testimonios", href: "/#testimonios" },
   { label: "Contacto", href: "/#contacto" },
 ];
 
@@ -95,9 +90,9 @@ export default function Navbar() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 15, scale: 0.95 }}
                       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                      className="absolute top-full left-0 mt-6 w-[550px] bg-white border border-charcoal/10 rounded-[2rem] p-7 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] overflow-hidden z-50"
+                      className="absolute top-full left-0 mt-6 w-[340px] bg-white border border-charcoal/10 rounded-[2rem] p-6 shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] overflow-hidden z-50"
                     >
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-2">
                         {item.children.map((child, index) => (
                           <motion.div
                             key={child.label}

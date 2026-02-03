@@ -14,8 +14,6 @@ const socialLinks = [
 const quickLinks = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/#servicios" },
-  { label: "Bodas", href: "/servicios/boda" },
-  { label: "15 Años", href: "/servicios/quinceaneras" },
   { label: "Galería", href: "/#galeria" },
   { label: "Contacto", href: "/#contacto" },
 ];
@@ -87,13 +85,13 @@ export default function Footer() {
               <ul className="grid grid-cols-1 gap-4">
                 {quickLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
+                    <Link
+                      to={link.href}
                       className="text-white/60 hover:text-primary hover:pl-2 transition-all duration-300 text-sm font-medium flex items-center gap-2 group"
                     >
                       <span className="w-1 h-1 bg-primary rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -104,16 +102,21 @@ export default function Footer() {
               <h4 className="text-gradient-gold text-lg font-heading font-bold mb-8 uppercase tracking-widest">Excelencia</h4>
               <ul className="grid grid-cols-1 gap-4">
                 {[
-                  "Planificación de Bodas",
-                  "Eventos de Gala",
-                  "Producción Corporativa",
-                  "Cenas Exclusivas",
-                  "Mobiliario de Lujo",
-                  "Diseño de Escenarios",
-                ].map((service) => (
-                  <li key={service} className="text-white/50 text-sm flex items-center gap-2">
-                    <span className="w-1.5 h-px bg-primary/40" />
-                    {service}
+                  { label: "Eventos Sociales Premium", href: "/servicios/sociales" },
+                  { label: "Producción Corporativa", href: "/servicios/corporativos" },
+                  { label: "Toldos Arquitectónicos", href: "/servicios/toldos" },
+                  { label: "Mobiliario y Menaje de Lujo", href: "/servicios/mobiliario-y-menaje" },
+                  { label: "Catering de Alta Gama", href: "/servicios/sociales" },
+                  { label: "Gestión de Protocolo", href: "/servicios/corporativos" },
+                ].map((item) => (
+                  <li key={item.label}>
+                    <Link
+                      to={item.href}
+                      className="text-white/50 hover:text-primary transition-colors text-sm flex items-center gap-2 group"
+                    >
+                      <span className="w-1.5 h-px bg-primary/40 group-hover:bg-primary transition-colors" />
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -123,6 +126,15 @@ export default function Footer() {
             <div>
               <h4 className="text-gradient-gold text-lg font-heading font-bold mb-8 uppercase tracking-widest">Contacto</h4>
               <div className="space-y-6">
+                <a
+                  href="tel:+51962369503"
+                  className="group flex items-center gap-4 text-white/60 hover:text-white transition-all duration-300"
+                >
+                  <div className="w-10 h-10 rounded-xl glass-dark flex items-center justify-center border border-white/5 group-hover:border-primary/30 group-hover:bg-primary/20">
+                    <Phone className="w-4 h-4 text-primary" />
+                  </div>
+                  <span className="text-sm font-bold tracking-wider">+51 962 369 503</span>
+                </a>
                 <a
                   href="tel:+51912560874"
                   className="group flex items-center gap-4 text-white/60 hover:text-white transition-all duration-300"
@@ -145,7 +157,10 @@ export default function Footer() {
                   <div className="w-10 h-10 rounded-xl glass-dark flex items-center justify-center border border-white/5 flex-shrink-0">
                     <MapPin className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-sm leading-relaxed font-medium">Lima - Perú<br />Santa Anita</span>
+                  <div className="flex flex-col">
+                    <span className="text-sm leading-relaxed font-bold">Las Vegas Calle 54 Mz A9 Lt 16</span>
+                    <span className="text-xs text-white/40 uppercase tracking-wider">Santa Anita - Lima</span>
+                  </div>
                 </div>
               </div>
             </div>

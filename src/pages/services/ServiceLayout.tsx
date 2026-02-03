@@ -20,6 +20,8 @@ interface ServiceLayoutProps {
     subtitle?: string;
     icon: LucideIcon;
     heroImage: string;
+    heroCarouselImages?: string[];
+    heroVideoId?: string;
     description: string;
     features: string[];
     carouselImages: string[];
@@ -32,6 +34,8 @@ export default function ServiceLayout({
     subtitle,
     icon: Icon,
     heroImage,
+    heroCarouselImages,
+    heroVideoId,
     description,
     features,
     carouselImages,
@@ -49,21 +53,79 @@ export default function ServiceLayout({
         <div className="min-h-screen bg-background text-foreground">
             <Navbar />
 
-            {/* 1. Minimalist Hero Section (Matching Main Page) */}
+            {/* 1. Hero Section (Video, Carousel, or Static) */}
             <section className="relative h-screen min-h-[100svh] flex items-center justify-center overflow-hidden bg-charcoal">
-                <motion.div
-                    initial={{ scale: 1.2 }}
-                    animate={{ scale: 1.1 }}
-                    transition={{ duration: 10, ease: "easeOut" }}
-                    className="absolute inset-0"
-                >
-                    <img
-                        src={heroImage}
-                        alt={title}
-                        className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/40 to-transparent z-10" />
-                </motion.div>
+                {heroVideoId ? (
+                    <div className="absolute inset-0 z-0 pointer-events-none">
+                        <div className="absolute inset-0 w-full h-full overflow-hidden">
+                            <iframe
+                                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full pointer-events-none scale-[1.01]"
+                                src={`https://www.youtube.com/embed/${heroVideoId}?autoplay=1&mute=1&loop=1&playlist=${heroVideoId}&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1`}
+                                title="Video de Fondo"
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                        <div className="absolute inset-0 bg-black/40 z-10" />
+                        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/60 to-transparent z-10" />
+                    </div>
+                ) : heroCarouselImages && heroCarouselImages.length > 0 ? (
+                    <div className="absolute inset-0">
+                        <Carousel
+                            className="w-full h-full"
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                            plugins={[
+                                Autoplay({
+                                    delay: 4000,
+                                }),
+                            ]}
+                        >
+                            <CarouselContent className="h-full ml-0">
+                                {heroCarouselImages.map((img, idx) => (
+                                    <CarouselItem key={idx} className="h-full pl-0">
+                                        <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black">
+                                            {/* Layer 1: Blurred Background */}
+                                            <div className="absolute inset-0 z-0">
+                                                <img
+                                                    src={img}
+                                                    alt=""
+                                                    className="w-full h-full object-cover blur-3xl opacity-40 scale-110"
+                                                />
+                                            </div>
+
+                                            {/* Layer 2: Full Crisp Image */}
+                                            <img
+                                                src={img}
+                                                alt={`${title} hero ${idx + 1}`}
+                                                className="relative z-10 max-w-full max-h-full object-contain pointer-events-none"
+                                            />
+
+                                            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent z-20" />
+                                        </div>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </div>
+                ) : (
+                    <motion.div
+                        initial={{ scale: 1.2 }}
+                        animate={{ scale: 1.1 }}
+                        transition={{ duration: 10, ease: "easeOut" }}
+                        className="absolute inset-0"
+                    >
+                        <img
+                            src={heroImage}
+                            alt={title}
+                            className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/60 to-transparent z-10" />
+                    </motion.div>
+                )}
 
                 {/* Refined Small Centered Scroll Button */}
                 <div className="absolute bottom-12 md:bottom-16 left-0 right-0 z-50 flex justify-center px-4">
@@ -164,36 +226,6 @@ export default function ServiceLayout({
                 </div>
             </section>
 
-            {/* 4. Video Carousel Placeholder */}
-            <section className="py-16 md:py-24 bg-background relative overflow-hidden">
-                <div className="container mx-auto px-6 relative z-10">
-                    <div className="max-w-7xl mx-auto">
-                        <div className="text-center mb-12 md:mb-16">
-                            <span className="text-primary text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold block mb-4">Experiencias en Video</span>
-                            <h2 className="text-3xl md:text-5xl font-heading font-bold text-charcoal uppercase">Producciones <span className="text-gradient-gold">Audiovisuales</span></h2>
-                        </div>
-
-                        <div className="flex justify-center items-center min-h-[300px] md:min-h-[400px] border-2 border-dashed border-charcoal/10 rounded-[2.5rem] md:rounded-[4rem] bg-charcoal/5 relative group cursor-pointer overflow-hidden">
-                            <div className="relative z-10 text-center px-6">
-                                <motion.div
-                                    className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-white shadow-2xl flex items-center justify-center mx-auto mb-6 transition-transform group-hover:scale-110"
-                                    animate={{ scale: [1, 1.05, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity }}
-                                >
-                                    <Play className="w-7 h-7 md:w-10 md:h-10 text-primary fill-current" />
-                                </motion.div>
-                                <p className="text-charcoal/40 font-bold uppercase tracking-widest text-[10px] md:text-sm">Próximamente sección de videos</p>
-                            </div>
-
-                            {/* Animated Background Placeholder Elements */}
-                            <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
-                                <div className="absolute top-10 left-10 w-24 md:w-32 h-24 md:h-32 bg-primary rounded-full blur-3xl animate-pulse" />
-                                <div className="absolute bottom-10 right-10 w-24 md:w-32 h-24 md:h-32 bg-primary rounded-full blur-3xl animate-pulse delay-700" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
             {/* 5. Detailed Service Information */}
             <section className="py-16 md:py-24 bg-charcoal text-white relative overflow-hidden">

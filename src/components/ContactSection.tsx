@@ -43,12 +43,22 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    const message = `*Nueva Solicitud de Cotización - Adriano Eventos*\n\n` +
+      `*Nombre:* ${formData.nombre}\n` +
+      `*Email:* ${formData.email}\n` +
+      `*Teléfono:* ${formData.telefono}\n` +
+      `*Tipo de Evento:* ${formData.tipoEvento}\n` +
+      `*Fecha:* ${formData.fecha || 'No especificada'}\n` +
+      `*Mensaje:* ${formData.mensaje}`;
+
+    const whatsappUrl = `https://wa.me/51912560874?text=${encodeURIComponent(message)}`;
+
+    // Redirigir a WhatsApp
+    window.open(whatsappUrl, '_blank');
 
     toast({
-      title: "¡Mensaje enviado!",
-      description: "Nos pondremos en contacto contigo pronto.",
+      title: "¡WhatsApp abierto!",
+      description: "Tu mensaje ha sido generado. Por favor, dale a 'Enviar' en WhatsApp.",
     });
 
     setFormData({
@@ -261,8 +271,10 @@ export default function ContactSection() {
                 </div>
                 <div>
                   <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-2">Oficina Principal</h4>
-                  <p className="font-bold">Santa Anita, Lima - Perú</p>
-                  <p className="text-sm text-muted-foreground mt-1 uppercase tracking-wider">CAL.2 MZA. C LOTE. 9 ASC. LOS PINOS</p>
+                  <p className="text-sm font-bold uppercase tracking-wider">Las Vegas Calle 54 Mz A9 Lt 16<br />Santa Anita - Lima</p>
+                  <p className="text-[10px] text-muted-foreground mt-2 uppercase tracking-widest leading-relaxed">
+                    Ref: Av. Metropolitana cruce con,<br />Av. Colectora Industrial
+                  </p>
                 </div>
               </div>
             </motion.div>

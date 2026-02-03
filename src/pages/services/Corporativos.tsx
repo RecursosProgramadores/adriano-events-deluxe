@@ -1,7 +1,12 @@
 /// <reference types="vite/client" />
 import { Building2 } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
-import heroImg from "@/assets/Eventoscorporativos/event1.jpg";
+import event1 from "@/assets/Eventoscorporativos/event1.jpg";
+import event4 from "@/assets/Eventoscorporativos/event4.jpg";
+import event5 from "@/assets/Eventoscorporativos/event5.jpg";
+import event6 from "@/assets/Eventoscorporativos/event6.jpg";
+
+const heroCarouselImages = [event1, event4, event5, event6];
 
 const images = import.meta.glob("../../assets/Eventoscorporativos/*.{png,jpg,jpeg,PNG,JPG}", {
     eager: true,
@@ -16,7 +21,9 @@ export default function Corporativos() {
             title="Eventos"
             subtitle="Corporativos"
             icon={Building2}
-            heroImage={heroImg}
+            heroImage={event1}
+            heroVideoId="iLwi9D3ksaM"
+            heroCarouselImages={heroCarouselImages}
             description="Elevamos la imagen de tu empresa con producciones corporativas de alto nivel. Desde conferencias ejecutivas hasta fiestas de aniversario, garantizamos una ejecución impecable que fortalece el branding de tu organización y motiva a tu equipo."
             features={[
                 "Congresos, Seminarios y Convenciones de gran escala",

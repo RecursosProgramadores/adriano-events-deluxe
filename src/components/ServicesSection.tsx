@@ -1,73 +1,41 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Link } from "react-router-dom";
-import { Heart, Crown, GraduationCap, Building2, PartyPopper, Tent, Armchair, UtensilsCrossed } from "lucide-react";
+import { Heart, Building2, Tent, Armchair } from "lucide-react";
 
 import weddingImg from "@/assets/hero-wedding.jpg";
-import quinceImg from "@/assets/quinceanera.jpg";
-import gradImg from "@/assets/graduation.jpg";
 import corpImg from "@/assets/corporate-event.jpg";
-import partyImg from "@/assets/birthday-party.jpg";
 import tentImg from "@/assets/tent-architectural.jpg";
-import furnitureImg from "@/assets/furniture-rental.jpg";
-import tablewareImg from "@/assets/tableware.jpg";
+import furnitureImg from "@/assets/tableware.jpg";
 
 const services = [
   {
-    id: "boda",
+    id: "sociales",
     icon: Heart,
-    title: "Bodas",
-    description: "Celebramos el amor con elegancia y atención a cada detalle",
+    title: "Eventos Sociales",
+    description: "Bodas, 15 Años, Graduaciones y celebraciones inolvidables",
     image: weddingImg,
-  },
-  {
-    id: "quinceaneras",
-    icon: Crown,
-    title: "15 Años",
-    description: "Quinceañeros mágicos que cumplen los sueños de cada princesa",
-    image: quinceImg,
-  },
-  {
-    id: "graduaciones",
-    icon: GraduationCap,
-    title: "Graduaciones",
-    description: "Celebra tus logros académicos con estilo y profesionalismo",
-    image: gradImg,
   },
   {
     id: "corporativos",
     icon: Building2,
     title: "Eventos Corporativos",
-    description: "Conferencias, integraciones y fiestas empresariales de alto nivel",
+    description: "Conferencias e integraciones empresariales de alto nivel",
     image: corpImg,
-  },
-  {
-    id: "cumple",
-    icon: PartyPopper,
-    title: "Shows Sociales",
-    description: "Cumpleaños, activaciones y showrooms memorables",
-    image: partyImg,
   },
   {
     id: "toldos",
     icon: Tent,
     title: "Alquiler de Toldos",
-    description: "Toldos básicos, arquitectónicos y con diseños personalizados",
+    description: "Toldos arquitectónicos y diseños a medida para tu evento",
     image: tentImg,
   },
   {
-    id: "mobiliario",
+    id: "mobiliario-y-menaje",
     icon: Armchair,
-    title: "Alquiler de Mobiliario",
-    description: "Mesas, sillas, barras de bar y más para tu evento",
+    title: "Mobiliario y Menaje",
+    description: "Mesas, sillas, cubertería y cristalería de lujo",
     image: furnitureImg,
-  },
-  {
-    id: "menaje",
-    icon: UtensilsCrossed,
-    title: "Alquiler de Menaje",
-    description: "Cubertería premium, copas, platos y decoración de mesa",
-    image: tablewareImg,
   },
 ];
 

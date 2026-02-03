@@ -1,7 +1,6 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-wedding.jpg";
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -16,21 +15,24 @@ export default function HeroSection() {
 
   return (
     <section ref={sectionRef} id="inicio" className="relative min-h-[100vh] flex items-center justify-center overflow-hidden bg-charcoal">
-      {/* Background Image with Parallax and Zoom */}
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{ y: backgroundY }}
       >
-        <motion.img
-          initial={{ scale: 1.2 }}
-          animate={{ scale: 1.1 }}
-          transition={{ duration: 10, ease: "easeOut" }}
-          src={heroImage}
-          alt="Evento de lujo - Producciones Eventos Adriano"
-          className="w-full h-full object-cover"
-        />
-        {/* Subtle Bottom Gradient for text readability if needed, but keeping it minimal for "natural" look */}
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/40 to-transparent z-10" />
+        <div className="absolute inset-0 w-full h-full overflow-hidden">
+          <iframe
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[177.78vh] min-w-full h-[56.25vw] min-h-full pointer-events-none"
+            src="https://www.youtube.com/embed/A7hO_XD8px0?autoplay=1&mute=1&loop=1&playlist=A7hO_XD8px0&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1&enablejsapi=1"
+            title="Video de Fondo"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
+        {/* Overlay to dim the video for better text contrast if needed */}
+        <div className="absolute inset-0 bg-black/40 z-10" />
+        {/* Subtle Bottom Gradient */}
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/60 to-transparent z-10" />
       </motion.div>
 
       {/* Floating Decorative Elements */}
