@@ -13,7 +13,11 @@ const assetFolders = [
 ];
 
 // Importación dinámica de todas las imágenes
-const allImages: Record<string, any> = import.meta.glob(
+interface ImageModule {
+  default: string;
+}
+
+const allImages: Record<string, ImageModule> = import.meta.glob(
   [
     "@/assets/15anos/*.{jpg,jpeg,png,JPG,JPEG,PNG}",
     "@/assets/bodas/*.{jpg,jpeg,png,JPG,JPEG,PNG}",
@@ -25,7 +29,7 @@ const allImages: Record<string, any> = import.meta.glob(
   { eager: true, query: '?url' }
 );
 
-const galleryImages = Object.entries(allImages).map(([path, module]: [string, any], index) => {
+const galleryImages = Object.entries(allImages).map(([path, module]: [string, ImageModule], index) => {
   const folder = assetFolders.find(f => path.toLowerCase().includes(f.path.split('/').pop()?.toLowerCase() || ""));
   const category = folder ? folder.category : "Otros";
   const suffix = folder ? folder.suffix : "Producción";
@@ -38,7 +42,7 @@ const galleryImages = Object.entries(allImages).map(([path, module]: [string, an
 
   return {
     id: index,
-    src: module.default || module,
+    src: module.default,
     category,
     title: title ? `${title.charAt(0).toUpperCase() + title.slice(1)} ${suffix}` : `${category} ${suffix}`
   };
