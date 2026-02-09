@@ -11,7 +11,7 @@ import {
     CarouselItem,
 } from "@/components/ui/carousel";
 import {
-    CheckCircle2, ArrowLeft, LucideIcon, Play
+    CheckCircle2, ArrowLeft, LucideIcon, Play, Youtube
 } from "lucide-react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -22,6 +22,10 @@ interface ServiceLayoutProps {
     heroImage: string;
     heroCarouselImages?: string[];
     heroVideoId?: string;
+    videoShorts?: { id: string; title: string }[];
+    videoSectionTitle?: string;
+    videoSectionSubtitle?: string;
+    videoSectionTheme?: "dark" | "light";
     description: string;
     features: string[];
     carouselImages: string[];
@@ -36,6 +40,10 @@ export default function ServiceLayout({
     heroImage,
     heroCarouselImages,
     heroVideoId,
+    videoShorts,
+    videoSectionTitle = "Síguenos en las Redes",
+    videoSectionSubtitle = "Momentos Adriano",
+    videoSectionTheme = "dark",
     description,
     features,
     carouselImages,
@@ -225,6 +233,75 @@ export default function ServiceLayout({
                     </div>
                 </div>
             </section>
+
+            {/* 4. Video Gallery Section (Optional) */}
+            {videoShorts && videoShorts.length > 0 && (
+                <section className={`py-16 md:py-24 relative overflow-hidden ${videoSectionTheme === "light" ? "bg-white" : "bg-charcoal-light"}`}>
+                    <div className="container mx-auto px-4 relative z-10">
+                        <div className="text-center mb-12 md:mb-16">
+                            <motion.span
+                                className="text-primary text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold inline-block mb-4"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                            >
+                                {videoSectionTitle}
+                            </motion.span>
+                            <motion.h2
+                                className={`text-3xl md:text-5xl font-heading font-bold uppercase mb-6 ${videoSectionTheme === "light" ? "text-charcoal" : "text-white"}`}
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                            >
+                                {videoSectionSubtitle.split(' ').map((word, i) => (
+                                    <span key={i} className={i === 1 ? "text-gradient-gold" : ""}>{word}{' '}</span>
+                                ))}
+                            </motion.h2>
+                            <div className="w-24 h-1 bg-primary mx-auto rounded-full glow-gold" />
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                            {videoShorts.map((short, index) => (
+                                <motion.a
+                                    key={short.id}
+                                    href={`https://youtube.com/shorts/${short.id}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="group relative aspect-[9/16] rounded-[2rem] overflow-hidden border border-white/10 glass-dark block"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ y: -10 }}
+                                >
+                                    <img
+                                        src={`https://img.youtube.com/vi/${short.id}/maxresdefault.jpg`}
+                                        alt={short.title}
+                                        className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                                        onError={(e) => {
+                                            (e.target as HTMLImageElement).src = `https://img.youtube.com/vi/${short.id}/hqdefault.jpg`;
+                                        }}
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-40 group-hover:opacity-20 transition-opacity duration-500" />
+                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                                        <div className="w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-500 shadow-2xl">
+                                            <Play className="w-6 h-6 text-white ml-1" fill="currentColor" />
+                                        </div>
+                                    </div>
+                                    <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
+                                        <div className="flex items-center gap-2">
+                                            <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center shadow-lg">
+                                                <Youtube className="w-4 h-4 text-white" />
+                                            </div>
+                                            <span className="text-[10px] font-bold uppercase tracking-widest text-white/80">YouTube Shorts</span>
+                                        </div>
+                                    </div>
+                                </motion.a>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            )}
 
 
             {/* 5. Detailed Service Information */}

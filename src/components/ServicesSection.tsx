@@ -7,6 +7,9 @@ import weddingImg from "@/assets/hero-wedding.jpg";
 import corpImg from "@/assets/corporate-event.jpg";
 import tentImg from "@/assets/tent-architectural.jpg";
 import furnitureImg from "@/assets/tableware.jpg";
+import mobile1 from "@/assets/movileservicios/moviles.png";
+import mobile2 from "@/assets/movileservicios/moviles1.png";
+import mobile3 from "@/assets/movileservicios/moviles3.png";
 
 const services = [
   {
@@ -15,6 +18,7 @@ const services = [
     title: "Eventos Sociales",
     description: "Bodas, 15 Años, Graduaciones y celebraciones inolvidables",
     image: weddingImg,
+    mobileImages: [mobile1, mobile2, mobile3], // Múltiples imágenes para móviles
   },
   {
     id: "corporativos",
@@ -70,7 +74,7 @@ export default function ServicesSection() {
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   return (
-    <section ref={sectionRef} id="servicios" className="section-padding bg-background relative overflow-hidden">
+    <section ref={sectionRef} id="servicios" className="pt-12 pb-24 bg-background relative overflow-hidden">
       {/* Background Shapes */}
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none">
         <motion.div
@@ -142,12 +146,24 @@ export default function ServicesSection() {
                 <Link to={`/servicios/${service.id}`} className="absolute inset-0 z-20" />
                 {/* Background Image Container */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
+                  {/* Desktop Image - Always show */}
                   <motion.img
                     src={service.image}
                     alt={service.title}
-                    className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                    className={`w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700 ${service.mobileImages ? 'hidden md:block' : ''}`}
                     whileHover={{ scale: 1.15 }}
                   />
+                  {/* Mobile Images - Only for Eventos Sociales */}
+                  {service.mobileImages && (
+                    <div className="md:hidden w-full h-full">
+                      <motion.img
+                        src={service.mobileImages[0]}
+                        alt={service.title}
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                        whileHover={{ scale: 1.15 }}
+                      />
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 group-hover:via-black/20 transition-all duration-500" />
                 </div>
 

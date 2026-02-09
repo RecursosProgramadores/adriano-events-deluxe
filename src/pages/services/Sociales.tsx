@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Heart, Crown, PartyPopper, GraduationCap, PlayCircle, ExternalLink } from "lucide-react";
+import { Heart, Crown, PartyPopper, GraduationCap, PlayCircle, ExternalLink, LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -22,14 +22,20 @@ import gradImg from "@/assets/graduation.jpg";
 // Hero Carousel Images
 import quince2 from "@/assets/15anos/quince2.jpg";
 import quince4 from "@/assets/15anos/quince4.jpg";
-import boda2 from "@/assets/bodas/boda2.jpg";
+import boda2 from "@/assets/bodas/boda.jpg";
+
+// Mobile Images
+import mobile1 from "@/assets/movileservicios/moviles.png";
+import mobile2 from "@/assets/movileservicios/moviles1.png";
+import mobile3 from "@/assets/movileservicios/moviles3.png";
 
 const heroCarouselImages = [quince2, quince4, boda2];
+const mobileHeroImages = [mobile1, mobile2, mobile3];
 
 interface SocialService {
     title: string;
     subtitle: string;
-    icon: any;
+    icon: LucideIcon;
     image: string;
     description: string;
     waMessage: string;
@@ -83,46 +89,69 @@ export default function Sociales() {
             <Navbar />
 
             {/* Hero Section (Carousel) */}
-            <section className="relative h-screen flex items-center justify-center overflow-hidden bg-charcoal">
+            <section className="relative h-[70vh] md:h-[80vh] flex items-center justify-center overflow-hidden bg-charcoal">
                 <div className="absolute inset-0">
-                    <Carousel
-                        className="w-full h-full"
-                        opts={{
-                            align: "start",
-                            loop: true,
-                        }}
-                        plugins={[
-                            Autoplay({
-                                delay: 4000,
-                            }),
-                        ]}
-                    >
-                        <CarouselContent className="h-full ml-0">
-                            {heroCarouselImages.map((img, idx) => (
+                    {/* Desktop Carousel */}
+                    <div className="hidden md:block w-full h-full">
+                        <Carousel
+                            className="w-full h-full"
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                            plugins={[
+                                Autoplay({
+                                    delay: 4000,
+                                }),
+                            ]}
+                        >
+                            <CarouselContent className="h-full ml-0">
+                                {heroCarouselImages.map((img, idx) => (
                                 <CarouselItem key={idx} className="h-full pl-0">
-                                    <div className="relative h-full w-full flex items-center justify-center overflow-hidden bg-black">
-                                        {/* Layer 1: Blurred Background */}
-                                        <div className="absolute inset-0 z-0">
-                                            <img
-                                                src={img}
-                                                alt=""
-                                                className="w-full h-full object-cover blur-3xl opacity-40 scale-110"
-                                            />
-                                        </div>
-
-                                        {/* Layer 2: Full Crisp Image */}
+                                    <div className="relative h-full w-full overflow-hidden flex items-center justify-center bg-black">
                                         <img
                                             src={img}
                                             alt={`Evento social ${idx + 1}`}
-                                            className="relative z-10 max-w-[80%] max-h-[80%] object-contain pointer-events-none transition-transform duration-700 hover:scale-105"
+                                            className="max-w-[75%] max-h-[75%] object-contain"
                                         />
-
-                                        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-charcoal/80 via-charcoal/20 to-transparent z-20" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
                                     </div>
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
                     </Carousel>
+                    </div>
+
+                    {/* Mobile Carousel */}
+                    <div className="md:hidden w-full h-full">
+                        <Carousel
+                            className="w-full h-full"
+                            opts={{
+                                align: "start",
+                                loop: true,
+                            }}
+                            plugins={[
+                                Autoplay({
+                                    delay: 4000,
+                                }),
+                            ]}
+                        >
+                            <CarouselContent className="h-full ml-0">
+                                {mobileHeroImages.map((img, idx) => (
+                                    <CarouselItem key={idx} className="h-full pl-0">
+                                        <div className="relative h-full w-full overflow-hidden">
+                                            <img
+                                                src={img}
+                                                alt={`Evento social móvil ${idx + 1}`}
+                                                className="w-full h-full object-cover object-center"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                                        </div>
+                                    </CarouselItem>
+                                ))}
+                            </CarouselContent>
+                        </Carousel>
+                    </div>
                 </div>
             </section>
 

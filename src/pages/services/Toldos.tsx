@@ -27,6 +27,15 @@ export default function Toldos() {
                 "Instalación por Personal Certificado y Altas Medidas de Seguridad"
             ]}
             carouselImages={carouselImages}
+            videoShorts={[
+                { id: "82OGrMaKdwY", title: "Evento Toldos 1" },
+                { id: "hi2vHij7vtw", title: "Evento Toldos 2" },
+                { id: "-t7MX7plrL4", title: "Evento Toldos 3" },
+                { id: "vFwKf-oxWPg", title: "Evento Toldos 4" }
+            ]}
+            videoSectionTitle="Proyectos de Alquiler"
+            videoSectionSubtitle="Estructuras en Detalle"
+            videoSectionTheme="light"
             whatsappMessage="¡Hola! Necesito informes sobre el alquiler de toldos para un evento."
         />
     );
