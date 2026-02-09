@@ -22,7 +22,7 @@ const allImages: Record<string, any> = import.meta.glob(
     "@/assets/mobiliarios/*.{jpg,jpeg,png,JPG,JPEG,PNG}",
     "@/assets/toldo/*.{jpg,jpeg,png,JPG,JPEG,PNG}"
   ],
-  { eager: true }
+  { eager: true, query: '?url' }
 );
 
 const galleryImages = Object.entries(allImages).map(([path, module]: [string, any], index) => {
