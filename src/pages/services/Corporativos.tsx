@@ -8,12 +8,9 @@ import event6 from "@/assets/Eventoscorporativos/event6.jpg";
 
 const heroCarouselImages = [event1, event4, event5, event6];
 
-const images = import.meta.glob("../../assets/Eventoscorporativos/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getCorporativosImages } from "@/assets/Eventoscorporativos/images";
 
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = getCorporativosImages().map(img => img.src);
 
 export default function Corporativos() {
     return (

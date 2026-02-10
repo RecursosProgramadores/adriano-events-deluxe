@@ -3,12 +3,9 @@ import { Armchair } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
 import heroImg from "@/assets/mobiliarios/mobiliario.jpg";
 
-const images = import.meta.glob("../../assets/mobiliarios/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getMobiliariosImages } from "@/assets/mobiliarios/images";
 
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = getMobiliariosImages().map(img => img.src);
 
 export default function Mobiliario() {
     return (

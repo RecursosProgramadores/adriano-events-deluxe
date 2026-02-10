@@ -3,12 +3,9 @@ import { Crown } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
 import heroImg from "@/assets/15anos/quince.jpeg";
 
-const images = import.meta.glob("../../assets/15anos/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { get15AnosImages } from "@/assets/15anos/images";
 
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = get15AnosImages().map(img => img.src);
 
 export default function Quinceaneras() {
     return (

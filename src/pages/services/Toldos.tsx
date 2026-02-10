@@ -3,12 +3,9 @@ import { Tent } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
 import heroImg from "@/assets/toldo/toldo.jpg";
 
-const images = import.meta.glob("../../assets/toldo/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getToldoImages } from "@/assets/toldo/images";
 
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = getToldoImages().map(img => img.src);
 
 export default function Toldos() {
     return (

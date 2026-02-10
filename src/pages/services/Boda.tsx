@@ -3,14 +3,10 @@ import { Heart } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
 import heroImg from "@/assets/bodas/imagen1.jpg";
 
-// Use Vite's magic to import all images in the folder
-const images = import.meta.glob("../../assets/bodas/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getBodasImages } from "@/assets/bodas/images";
 
 // Extract the URLs from the imported modules
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = getBodasImages().map(img => img.src);
 
 export default function Boda() {
     return (

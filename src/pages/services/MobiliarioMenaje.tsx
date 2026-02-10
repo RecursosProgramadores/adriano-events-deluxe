@@ -4,12 +4,9 @@ import ServiceLayout from "./ServiceLayout";
 import furnitureHero from "@/assets/mobiliarios/mobiliario.jpg";
 
 // Import images from mobiliarios folder
-const furnitureImages = import.meta.glob("../../assets/mobiliarios/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getMobiliariosImages } from "@/assets/mobiliarios/images";
 
-const carouselImages = Object.values(furnitureImages).map((mod: any) => mod.default || mod);
+const carouselImages = getMobiliariosImages().map(img => img.src);
 
 export default function MobiliarioMenaje() {
     return (

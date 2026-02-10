@@ -3,12 +3,9 @@ import { PartyPopper } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
 import heroImg from "@/assets/cumple/cumple.jpg";
 
-const images = import.meta.glob("../../assets/cumple/*.{png,jpg,jpeg,PNG,JPG}", {
-    eager: true,
-    query: '?url',
-});
+import { getCumpleImages } from "@/assets/cumple/images";
 
-const carouselImages = Object.values(images).map((mod: any) => mod.default || mod);
+const carouselImages = getCumpleImages().map(img => img.src);
 
 export default function Cumple() {
     return (
