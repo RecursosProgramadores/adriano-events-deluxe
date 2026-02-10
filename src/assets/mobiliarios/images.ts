@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import img1 from "./mobiliario.jpg";
 import img2 from "./mobiliario10.jpg";
 import img3 from "./mobiliario11.jpg";
@@ -17,20 +16,26 @@ import img15 from "./mobiliario6.png";
 import img16 from "./mobiliario7.jpg";
 import img17 from "./mobiliario8.jpg";
 import img18 from "./mobiliario9.jpg";
-=======
-/// <reference types="vite/client" />
-
-const modules = import.meta.glob("./*.{png,jpg,jpeg,PNG,JPG,JPEG}", {
-    eager: true,
-    query: '?url',
-});
-
-const entries = Object.entries(modules).map(([path, mod]: [string, any]) => {
-    const name = path.replace(/^\.\//, '').replace(/\.\w+$/, '');
-    return { src: mod.default || mod, name };
-});
->>>>>>> 8da7ee3fcfa4e3b5a4d0c786c443a7091f7eb11d
 
 export function getMobiliariosImages() {
-    return entries;
+    return [
+        { src: img1, name: "mobiliario" },
+        { src: img2, name: "mobiliario10" },
+        { src: img3, name: "mobiliario11" },
+        { src: img4, name: "mobiliario12" },
+        { src: img5, name: "mobiliario13" },
+        { src: img6, name: "mobiliario14" },
+        { src: img7, name: "mobiliario15" },
+        { src: img8, name: "mobiliario16" },
+        { src: img9, name: "mobiliario17" },
+        { src: img10, name: "mobiliario18" },
+        { src: img11, name: "mobiliario2" },
+        { src: img12, name: "mobiliario3" },
+        { src: img13, name: "mobiliario4" },
+        { src: img14, name: "mobiliario5" },
+        { src: img15, name: "mobiliario6" },
+        { src: img16, name: "mobiliario7" },
+        { src: img17, name: "mobiliario8" },
+        { src: img18, name: "mobiliario9" },
+    ];
 }
