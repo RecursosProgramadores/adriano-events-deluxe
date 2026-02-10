@@ -25,7 +25,7 @@ import quince4 from "@/assets/15anos/quince4.jpg";
 import boda2 from "@/assets/bodas/boda.jpg";
 
 // Mobile Images
-import mobile1 from "@/assets/movileservicios/moviles.png";
+import mobile1 from "@/assets/movileservicios/movileS.png";
 import mobile2 from "@/assets/movileservicios/moviles1.png";
 import mobile3 from "@/assets/movileservicios/moviles3.png";
 

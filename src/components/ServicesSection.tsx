@@ -7,7 +7,7 @@ import weddingImg from "@/assets/hero-wedding.jpg";
 import corpImg from "@/assets/corporate-event.jpg";
 import tentImg from "@/assets/tent-architectural.jpg";
 import furnitureImg from "@/assets/tableware.jpg";
-import mobile1 from "@/assets/movileservicios/moviles.png";
+import mobile1 from "@/assets/movileservicios/movileS.png";
 import mobile2 from "@/assets/movileservicios/moviles1.png";
 import mobile3 from "@/assets/movileservicios/moviles3.png";
 
