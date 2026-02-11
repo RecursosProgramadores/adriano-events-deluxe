@@ -7,9 +7,9 @@ import weddingImg from "@/assets/hero-wedding.jpg";
 import corpImg from "@/assets/corporate-event.jpg";
 import tentImg from "@/assets/tent-architectural.jpg";
 import furnitureImg from "@/assets/tableware.jpg";
-import mobile1 from "@/assets/movileservicios/moviles.png";
-import mobile2 from "@/assets/movileservicios/moviles1.png";
-import mobile3 from "@/assets/movileservicios/moviles3.png";
+import mobile from "@/assets/movileservicios/movile.png";
+import mobile2 from "@/assets/movileservicios/movile2.png";
+import mobile3 from "@/assets/movileservicios/movile3.png";
 
 const services = [
   {
@@ -18,7 +18,7 @@ const services = [
     title: "Eventos Sociales",
     description: "Bodas, 15 Años, Graduaciones y celebraciones inolvidables",
     image: weddingImg,
-    mobileImages: [mobile1, mobile2, mobile3], // Múltiples imágenes para móviles
+    mobileImages: [mobile, mobile2, mobile3], // Múltiples imágenes para móviles
   },
   {
     id: "corporativos",

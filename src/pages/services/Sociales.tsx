@@ -25,12 +25,12 @@ import quince4 from "@/assets/15anos/quince4.jpg";
 import boda2 from "@/assets/bodas/boda.jpg";
 
 // Mobile Images
-import mobile1 from "@/assets/movileservicios/moviles.png";
-import mobile2 from "@/assets/movileservicios/moviles1.png";
-import mobile3 from "@/assets/movileservicios/moviles3.png";
+import mobile from "@/assets/movileservicios/movile.png";
+import mobile2 from "@/assets/movileservicios/movile2.png";
+import mobile3 from "@/assets/movileservicios/movile3.png";
 
 const heroCarouselImages = [quince2, quince4, boda2];
-const mobileHeroImages = [mobile1, mobile2, mobile3];
+const mobileHeroImages = [mobile, mobile2, mobile3];
 
 interface SocialService {
     title: string;

@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 import { Tent } from "lucide-react";
 import ServiceLayout from "./ServiceLayout";
-import heroImg from "@/assets/toldo/toldo.jpg";
+import heroImg from "@/assets/toldo/portadatoldo.jpeg";
 
 import { getToldoImages } from "@/assets/toldo/images";
 

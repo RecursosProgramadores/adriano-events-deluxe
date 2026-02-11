@@ -12,13 +12,17 @@ import img1 from "@/assets/carrousel/carrousel1.jpeg";
 import img2 from "@/assets/carrousel/carrousel2.jpeg";
 import img3 from "@/assets/carrousel/carrousel3.jpeg";
 import img4 from "@/assets/carrousel/carrousel4.jpeg";
+import img5 from "@/assets/carrousel/carrousel5.jpeg";
+import img6 from "@/assets/carrousel/carrousel6.jpeg";
 import mobile1 from "@/assets/carrousel/movile1.png";
 import mobile2 from "@/assets/carrousel/movile2.png";
 import mobile3 from "@/assets/carrousel/movile3.png";
 import mobile4 from "@/assets/carrousel/movile4.png";
+import mobile5 from "@/assets/carrousel/movile5.png";
+import mobile6 from "@/assets/carrousel/movile6.png";
 
-const images = [img1, img2, img3, img4];
-const mobileImages = [mobile1, mobile2, mobile3, mobile4];
+const images = [img1, img2, img3, img4, img5, img6];
+const mobileImages = [mobile1, mobile2, mobile3, mobile4, mobile5, mobile6];
 
 export default function HeroSection() {
   const sectionRef = useRef<HTMLElement>(null);
